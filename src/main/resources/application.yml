@@ -4,6 +4,8 @@ server:
     context-path: /
     encoding:
       charset: utf-8
+    session:
+      timeout: 30
 
 # hibernate는 SQL을 직접 사용하지 않고 메서드 만으로 쿼리를 사용할수있게 하는 라이브러리
 # hibernate 기술을 쉽게 사용하게 해주는 라이브러리가 JPA이다.
