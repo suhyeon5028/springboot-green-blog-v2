@@ -9,14 +9,27 @@ $("#btn-join").click(()=>{
 
 // 2. 기능
 
+// 유저네임 기억하기 메서드 httpOnly 속성이 걸려있으면 안된다 주의하자!
+function usernameRemember(){
+    let cookies = document.cookie.split("=");
+    //console.log(cookies[1]);
+    $("#username").val(cookies[1]);
+}
+usernameRemember();
+
 // 로그인 요청 메서드
 async function login(){
-  let loginDto = {
+
+    // checkbox의 체크여부를 제이쿼리에서 확인하는 법
+    let checked = $("#remember").is(':checked');
+
+    let loginDto = {
     username: $("#username").val(),
-    password: $("#password").val()
+    password: $("#password").val(),
+    remember: checked ? "on" : "off"
   }
 
-  let response = await fetch("/api/login",{
+    let response = await fetch("/login",{
         method: "POST",
         body: JSON.stringify(loginDto),
         headers: {
@@ -44,7 +57,7 @@ async function join(){
         addr: $("#addr").val(),
     }
     // (2) JSON으로 변환해서 fetch 요청한다. (통신의 표준이 제이슨이니까)
-    let response = await fetch("/api/join",{
+    let response = await fetch("/join",{
         method: "POST",
         body: JSON.stringify(userDto),
         headers: {
