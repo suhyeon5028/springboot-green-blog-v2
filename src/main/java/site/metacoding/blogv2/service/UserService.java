@@ -1,5 +1,7 @@
 package site.metacoding.blogv2.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -26,5 +28,15 @@ public class UserService {
         // SELECT * FROM user WHERE username=:username AND password = :password
         User userEntity = userRepository.mLogin(loginDto.getUsername(), loginDto.getPassword());
         return userEntity;
+    }
+
+    public User 회원정보(Integer id) {
+        Optional<User> userOp = userRepository.findById(id);
+
+        if (userOp.isPresent()) {
+            return userOp.get();
+        } else {
+            throw new RuntimeException("아이디를 찾을 수 없습니다.");
+        }
     }
 }
