@@ -2,7 +2,6 @@ package site.metacoding.blogv2.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import site.metacoding.blogv2.config.filter.MyFilter1;
 import site.metacoding.blogv2.config.filter.MyFilter2;
