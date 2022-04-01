@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -55,6 +54,7 @@ public class Post { // N (드라이빙 테이블, FK의 주인)
     @Column(nullable = false)
     private Integer pageCount; // 조회수
 
+    @JsonIgnoreProperties({ "password" })
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;

@@ -1,5 +1,7 @@
 package site.metacoding.blogv2.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +15,13 @@ import site.metacoding.blogv2.service.PostService;
 @Controller
 public class PostController {
     private final PostService postService;
+    private final HttpSession session;
 
     @GetMapping("/post/{id}")
     public String detail(@PathVariable Integer id, Model model) {
         Post postEntity = postService.글상세보기(id);
-        model.addAttribute("post", postEntity);
+        model.addAttribute("comments", postEntity.getComments());
+        model.addAttribute("postId", id);
         return "post/detail";
     }
 
